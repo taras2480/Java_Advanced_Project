@@ -3,18 +3,18 @@ package ua.lviv.lgs.admissionsCommittee.domain;
 import java.util.Set;
 
 public class Faculty {
-	
+
 	private Integer id;
 	private String nameFaculty;
 	private Integer amountOfStudents;
 	private Set<SubjectsOfAttestation> subjects;
-	
+
 	public Faculty() {
-		
+
 	}
 
 	public Faculty(String nameFaculty, Integer amountOfStudents, Set<SubjectsOfAttestation> subjects) {
-		
+
 		this.nameFaculty = nameFaculty;
 		this.amountOfStudents = amountOfStudents;
 		this.subjects = subjects;
@@ -108,8 +108,5 @@ public class Faculty {
 		return "Faculty [id=" + id + ", nameFaculty=" + nameFaculty + ", amountOfStudents=" + amountOfStudents
 				+ ", subjects=" + subjects + "]";
 	}
-	
-	
-	
 
 }

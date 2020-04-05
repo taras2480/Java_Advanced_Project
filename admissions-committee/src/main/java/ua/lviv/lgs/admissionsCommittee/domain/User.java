@@ -1,5 +1,6 @@
 package ua.lviv.lgs.admissionsCommittee.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class User {
@@ -12,23 +13,32 @@ public class User {
 	private UserRole role;
 	private String password;
 
+	private String photoName;
+	private String fileType;
+
+	private byte[] data;
+
 	public User() {
 
 	}
 
-	public User(String firstName, String lastName, String email, Date birthday, UserRole role, String password) {
-		
+	public User(String firstName, String lastName, String email, Date birthday, UserRole role, String password,
+			String photoName, String fileType, byte[] data) {
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.birthday = birthday;
 		this.role = role;
 		this.password = password;
+		this.photoName = photoName;
+		this.fileType = fileType;
+		this.data = data;
 	}
 
 	public User(Integer id, String firstName, String lastName, String email, Date birthday, UserRole role,
-			String password) {
-		
+			String password, String photoName, String fileType, byte[] data) {
+
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -36,6 +46,9 @@ public class User {
 		this.birthday = birthday;
 		this.role = role;
 		this.password = password;
+		this.photoName = photoName;
+		this.fileType = fileType;
+		this.data = data;
 	}
 
 	public Integer getId() {
@@ -94,16 +107,43 @@ public class User {
 		this.password = password;
 	}
 
+	public String getPhotoName() {
+		return photoName;
+	}
+
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
+		result = prime * result + Arrays.hashCode(data);
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((fileType == null) ? 0 : fileType.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((photoName == null) ? 0 : photoName.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		return result;
 	}
@@ -122,10 +162,17 @@ public class User {
 				return false;
 		} else if (!birthday.equals(other.birthday))
 			return false;
+		if (!Arrays.equals(data, other.data))
+			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
+			return false;
+		if (fileType == null) {
+			if (other.fileType != null)
+				return false;
+		} else if (!fileType.equals(other.fileType))
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -147,6 +194,11 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (photoName == null) {
+			if (other.photoName != null)
+				return false;
+		} else if (!photoName.equals(other.photoName))
+			return false;
 		if (role != other.role)
 			return false;
 		return true;
@@ -155,7 +207,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", birthday=" + birthday + ", role=" + role + ", password=" + password + "]";
+				+ ", birthday=" + birthday + ", role=" + role + ", password=" + password + ", photoName=" + photoName
+				+ ", fileType=" + fileType + ", data=" + Arrays.toString(data) + "]";
 	}
 
 }

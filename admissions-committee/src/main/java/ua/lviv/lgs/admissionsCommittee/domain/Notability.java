@@ -1,18 +1,16 @@
 package ua.lviv.lgs.admissionsCommittee.domain;
 
 public class Notability {
-	
+
 	private Integer id;
 	private Integer userId;
 	private Integer facultyId;
 	private Boolean approved;
 	private Integer rating;
 	private Integer summaryRating;
-	
-	
-	
+
 	public Notability() {
-		
+
 	}
 
 	public Notability(Integer userId, Integer facultyId, Boolean approved, Integer rating, Integer summaryRating) {
@@ -143,10 +141,5 @@ public class Notability {
 		return "Notability [id=" + id + ", userId=" + userId + ", facultyId=" + facultyId + ", approved=" + approved
 				+ ", rating=" + rating + ", summaryRating=" + summaryRating + "]";
 	}
-	
-	
-	
-	
-	
 
 }

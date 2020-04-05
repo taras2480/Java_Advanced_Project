@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ua.lviv.lgs.admissionsCommittee.domain.User;
 
 public interface UserRepositoriy extends JpaRepository<User, Integer> {
-	
-	List<User>findByEmail(String email);
+
+	List<User> findByEmail(String email);
 
 }
