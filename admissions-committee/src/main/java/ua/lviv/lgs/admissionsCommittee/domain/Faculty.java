@@ -1,26 +1,43 @@
 package ua.lviv.lgs.admissionsCommittee.domain;
 
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "faculty")
 public class Faculty {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+	@Column
 	private String nameFaculty;
+	
+	@Column
 	private Integer amountOfStudents;
-	private Set<SubjectsOfAttestation> subjects;
+	
+	@Enumerated(EnumType.STRING)
+	private SubjectsOfAttestation subjects;
 
 	public Faculty() {
 
 	}
 
-	public Faculty(String nameFaculty, Integer amountOfStudents, Set<SubjectsOfAttestation> subjects) {
-
+	public Faculty(String nameFaculty, Integer amountOfStudents, SubjectsOfAttestation subjects) {
+		super();
 		this.nameFaculty = nameFaculty;
 		this.amountOfStudents = amountOfStudents;
 		this.subjects = subjects;
 	}
 
-	public Faculty(Integer id, String nameFaculty, Integer amountOfStudents, Set<SubjectsOfAttestation> subjects) {
+	public Faculty(Integer id, String nameFaculty, Integer amountOfStudents, SubjectsOfAttestation subjects) {
 		super();
 		this.id = id;
 		this.nameFaculty = nameFaculty;
@@ -52,11 +69,11 @@ public class Faculty {
 		this.amountOfStudents = amountOfStudents;
 	}
 
-	public Set<SubjectsOfAttestation> getSubjects() {
+	public SubjectsOfAttestation getSubjects() {
 		return subjects;
 	}
 
-	public void setSubjects(Set<SubjectsOfAttestation> subjects) {
+	public void setSubjects(SubjectsOfAttestation subjects) {
 		this.subjects = subjects;
 	}
 
@@ -95,10 +112,7 @@ public class Faculty {
 				return false;
 		} else if (!nameFaculty.equals(other.nameFaculty))
 			return false;
-		if (subjects == null) {
-			if (other.subjects != null)
-				return false;
-		} else if (!subjects.equals(other.subjects))
+		if (subjects != other.subjects)
 			return false;
 		return true;
 	}
@@ -108,5 +122,7 @@ public class Faculty {
 		return "Faculty [id=" + id + ", nameFaculty=" + nameFaculty + ", amountOfStudents=" + amountOfStudents
 				+ ", subjects=" + subjects + "]";
 	}
+
+	
 
 }

@@ -1,83 +1,63 @@
 package ua.lviv.lgs.admissionsCommittee.domain;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "notability")
 public class Notability {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private Integer userId;
-	private Integer facultyId;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "faculty_id", referencedColumnName = "id")
+	private Faculty faculty;
+
+	@Column
 	private Boolean approved;
-	private Integer rating;
+
+	@Lob
+	private List<Integer> rating; 
+
+	@Column
 	private Integer summaryRating;
 
 	public Notability() {
 
 	}
 
-	public Notability(Integer userId, Integer facultyId, Boolean approved, Integer rating, Integer summaryRating) {
+	public Notability(User user, Faculty faculty, Boolean approved, List<Integer> rating, Integer summaryRating) {
 		super();
-		this.userId = userId;
-		this.facultyId = facultyId;
+		this.user = user;
+		this.faculty = faculty;
 		this.approved = approved;
-		this.rating = rating;
+		/* this.rating = rating; */
 		this.summaryRating = summaryRating;
 	}
 
-	public Notability(Integer id, Integer userId, Integer facultyId, Boolean approved, Integer rating,
+	public Notability(Integer id, User user, Faculty faculty, Boolean approved, List<Integer> rating,
 			Integer summaryRating) {
 		super();
 		this.id = id;
-		this.userId = userId;
-		this.facultyId = facultyId;
+		this.user = user;
+		this.faculty = faculty;
 		this.approved = approved;
-		this.rating = rating;
-		this.summaryRating = summaryRating;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public Integer getFacultyId() {
-		return facultyId;
-	}
-
-	public void setFacultyId(Integer facultyId) {
-		this.facultyId = facultyId;
-	}
-
-	public Boolean getApproved() {
-		return approved;
-	}
-
-	public void setApproved(Boolean approved) {
-		this.approved = approved;
-	}
-
-	public Integer getRating() {
-		return rating;
-	}
-
-	public void setRating(Integer rating) {
-		this.rating = rating;
-	}
-
-	public Integer getSummaryRating() {
-		return summaryRating;
-	}
-
-	public void setSummaryRating(Integer summaryRating) {
+		/* this.rating = rating; */
 		this.summaryRating = summaryRating;
 	}
 
@@ -86,11 +66,11 @@ public class Notability {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((approved == null) ? 0 : approved.hashCode());
-		result = prime * result + ((facultyId == null) ? 0 : facultyId.hashCode());
+		result = prime * result + ((faculty == null) ? 0 : faculty.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
+		/* result = prime * result + ((rating == null) ? 0 : rating.hashCode()); */
 		result = prime * result + ((summaryRating == null) ? 0 : summaryRating.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -108,38 +88,38 @@ public class Notability {
 				return false;
 		} else if (!approved.equals(other.approved))
 			return false;
-		if (facultyId == null) {
-			if (other.facultyId != null)
+		if (faculty == null) {
+			if (other.faculty != null)
 				return false;
-		} else if (!facultyId.equals(other.facultyId))
+		} else if (!faculty.equals(other.faculty))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (rating == null) {
-			if (other.rating != null)
-				return false;
-		} else if (!rating.equals(other.rating))
-			return false;
+		/*
+		 * if (rating == null) { if (other.rating != null) return false; } else if
+		 * (!rating.equals(other.rating))
+		 */
+		/* return false; */
 		if (summaryRating == null) {
 			if (other.summaryRating != null)
 				return false;
 		} else if (!summaryRating.equals(other.summaryRating))
 			return false;
-		if (userId == null) {
-			if (other.userId != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!userId.equals(other.userId))
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Notability [id=" + id + ", userId=" + userId + ", facultyId=" + facultyId + ", approved=" + approved
-				+ ", rating=" + rating + ", summaryRating=" + summaryRating + "]";
+		return "Notability [id=" + id + ", user=" + user + ", faculty=" + faculty + ", approved=" + approved
+				+ /* ", rating=" + rating + ", summaryRating=" */ +summaryRating + "]";
 	}
 
 }

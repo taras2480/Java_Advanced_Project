@@ -1,51 +1,70 @@
 package ua.lviv.lgs.admissionsCommittee.domain;
 
 import java.util.Arrays;
-import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "user")
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+	
 	private String firstName;
 	private String lastName;
 	private String email;
-	private Date birthday;
-	private UserRole role;
+	private String birthday;
+	
 	private String password;
-
+	private String confirmPassword;
 	private String photoName;
 	private String fileType;
+	
+	@Enumerated(EnumType.STRING)
+	private UserRole role;
 
+	@Lob
 	private byte[] data;
 
 	public User() {
 
 	}
-
-	public User(String firstName, String lastName, String email, Date birthday, UserRole role, String password,
-			String photoName, String fileType, byte[] data) {
-
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.birthday = birthday;
-		this.role = role;
-		this.password = password;
-		this.photoName = photoName;
-		this.fileType = fileType;
-		this.data = data;
+	
+	public User(User user) {
+		this.id = user.id;
+		this.email = user.email;
+		this.birthday = user.birthday;
+		this.firstName = user.firstName;
+		this.lastName = user.lastName;
+		this.password = user.password;
+		this.confirmPassword = user.confirmPassword;
+		this.role = user.role;
+		this.photoName = user.photoName;
+		this.fileType = user.fileType;
+		this.data = user.data;
 	}
 
-	public User(Integer id, String firstName, String lastName, String email, Date birthday, UserRole role,
-			String password, String photoName, String fileType, byte[] data) {
-
-		this.id = id;
+	public User(String firstName, String lastName, String email, String birthday, UserRole role, String password,
+			String confirmPassword, String photoName, String fileType, byte[] data) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.birthday = birthday;
 		this.role = role;
 		this.password = password;
+		this.confirmPassword = confirmPassword;
 		this.photoName = photoName;
 		this.fileType = fileType;
 		this.data = data;
@@ -83,11 +102,11 @@ public class User {
 		this.email = email;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
@@ -105,6 +124,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public String getPhotoName() {
@@ -136,6 +163,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
+		result = prime * result + ((confirmPassword == null) ? 0 : confirmPassword.hashCode());
 		result = prime * result + Arrays.hashCode(data);
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fileType == null) ? 0 : fileType.hashCode());
@@ -161,6 +189,11 @@ public class User {
 			if (other.birthday != null)
 				return false;
 		} else if (!birthday.equals(other.birthday))
+			return false;
+		if (confirmPassword == null) {
+			if (other.confirmPassword != null)
+				return false;
+		} else if (!confirmPassword.equals(other.confirmPassword))
 			return false;
 		if (!Arrays.equals(data, other.data))
 			return false;
@@ -207,8 +240,11 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", birthday=" + birthday + ", role=" + role + ", password=" + password + ", photoName=" + photoName
-				+ ", fileType=" + fileType + ", data=" + Arrays.toString(data) + "]";
+				+ ", birthday=" + birthday + ", role=" + role + ", password=" + password + ", confirmPassword="
+				+ confirmPassword + ", photoName=" + photoName + ", fileType=" + fileType + ", data="
+				+ Arrays.toString(data) + "]";
 	}
+
+	
 
 }
