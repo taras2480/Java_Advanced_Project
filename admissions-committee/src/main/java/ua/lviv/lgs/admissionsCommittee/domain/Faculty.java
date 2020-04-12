@@ -1,9 +1,10 @@
 package ua.lviv.lgs.admissionsCommittee.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,57 +24,26 @@ public class Faculty {
 	@Column
 	private Integer amountOfStudents;
 	
-	@Enumerated(EnumType.STRING)
-	private SubjectsOfAttestation subjects;
+	@ElementCollection  
+    @Column(name="subjects", length=50)
+	private List<SubjectsOfAttestation> subjects;
 
 	public Faculty() {
 
 	}
 
-	public Faculty(String nameFaculty, Integer amountOfStudents, SubjectsOfAttestation subjects) {
+	public Faculty(String nameFaculty, Integer amountOfStudents, List<SubjectsOfAttestation> subjects) {
 		super();
 		this.nameFaculty = nameFaculty;
 		this.amountOfStudents = amountOfStudents;
 		this.subjects = subjects;
 	}
 
-	public Faculty(Integer id, String nameFaculty, Integer amountOfStudents, SubjectsOfAttestation subjects) {
+	public Faculty(Integer id, String nameFaculty, Integer amountOfStudents, List<SubjectsOfAttestation> subjects) {
 		super();
 		this.id = id;
 		this.nameFaculty = nameFaculty;
 		this.amountOfStudents = amountOfStudents;
-		this.subjects = subjects;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNameFaculty() {
-		return nameFaculty;
-	}
-
-	public void setNameFaculty(String nameFaculty) {
-		this.nameFaculty = nameFaculty;
-	}
-
-	public Integer getAmountOfStudents() {
-		return amountOfStudents;
-	}
-
-	public void setAmountOfStudents(Integer amountOfStudents) {
-		this.amountOfStudents = amountOfStudents;
-	}
-
-	public SubjectsOfAttestation getSubjects() {
-		return subjects;
-	}
-
-	public void setSubjects(SubjectsOfAttestation subjects) {
 		this.subjects = subjects;
 	}
 
@@ -112,7 +82,10 @@ public class Faculty {
 				return false;
 		} else if (!nameFaculty.equals(other.nameFaculty))
 			return false;
-		if (subjects != other.subjects)
+		if (subjects == null) {
+			if (other.subjects != null)
+				return false;
+		} else if (!subjects.equals(other.subjects))
 			return false;
 		return true;
 	}
