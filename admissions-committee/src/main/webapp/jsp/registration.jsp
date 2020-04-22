@@ -76,6 +76,23 @@
                 <form:errors path="birthday"></form:errors>
             </div>
         </spring:bind>
+        
+        <%-- <spring:bind path="photoName">
+            <div>
+				
+				<form id="multipleUploadForm" name="multipleUploadForm">
+					<input id="multipleFileUploadInput" type="file" name="files"
+						multiple required />
+					<button type="submit">Submit</button>
+				</form>
+
+				<div>
+					<div id="multipleFileUploadError"></div>
+					<div id="multipleFileUploadSuccess"></div>
+				</div>
+
+			</div>
+        </spring:bind> --%>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
