@@ -1,28 +1,8 @@
-package ua.lviv.lgs.admissionsCommittee.domain;
+package ua.lviv.lgs.admissionsCommittee.dto;
 
-import java.util.Arrays;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-
-
-@Entity
-@Table(name = "user")
-public class User {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-	
+public class UserDto {
 	
 	private String firstName;
 	private String lastName;
@@ -31,37 +11,17 @@ public class User {
 	
 	private String password;
 	private String confirmPassword;
-	@ElementCollection  
-    @Column(name="photoName")
 	private Set <String> photoName;
+	private String fileDownloadUri;
 	private String fileType;
+	private long size;
 	
-	@Enumerated(EnumType.STRING)
-	private UserRole role;
-
-	@Lob
-	private byte[] data;
-
-	public User() {
-
-	}
-	
-	public User(User user) {
-		this.id = user.id;
-		this.email = user.email;
-		this.birthday = user.birthday;
-		this.firstName = user.firstName;
-		this.lastName = user.lastName;
-		this.password = user.password;
-		this.confirmPassword = user.confirmPassword;
-		this.role = user.role;
-		this.photoName = user.photoName;
-		this.fileType = user.fileType;
-		this.data = user.data;
+	public UserDto() {
+		
 	}
 
-	public User(String firstName, String lastName, String email, String birthday, String password,
-			String confirmPassword, Set<String> photoName, String fileType, UserRole role, byte[] data) {
+	public UserDto(String firstName, String lastName, String email, String birthday, String password,
+			String confirmPassword, Set<String> photoName, String fileDownloadUri, String fileType, long size) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -70,33 +30,9 @@ public class User {
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 		this.photoName = photoName;
+		this.fileDownloadUri = fileDownloadUri;
 		this.fileType = fileType;
-		this.role = role;
-		this.data = data;
-	}
-
-	public User(Integer id, String firstName, String lastName, String email, String birthday, String password,
-			String confirmPassword, Set<String> photoName, String fileType, UserRole role, byte[] data) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.birthday = birthday;
-		this.password = password;
-		this.confirmPassword = confirmPassword;
-		this.photoName = photoName;
-		this.fileType = fileType;
-		this.role = role;
-		this.data = data;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+		this.size = size;
 	}
 
 	public String getFirstName() {
@@ -155,6 +91,14 @@ public class User {
 		this.photoName = photoName;
 	}
 
+	public String getFileDownloadUri() {
+		return fileDownloadUri;
+	}
+
+	public void setFileDownloadUri(String fileDownloadUri) {
+		this.fileDownloadUri = fileDownloadUri;
+	}
+
 	public String getFileType() {
 		return fileType;
 	}
@@ -163,23 +107,13 @@ public class User {
 		this.fileType = fileType;
 	}
 
-	public UserRole getRole() {
-		return role;
+	public long getSize() {
+		return size;
 	}
 
-	public void setRole(UserRole role) {
-		this.role = role;
+	public void setSize(long size) {
+		this.size = size;
 	}
-
-	public byte[] getData() {
-		return data;
-	}
-
-	public void setData(byte[] data) {
-		this.data = data;
-	}
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -187,15 +121,14 @@ public class User {
 		int result = 1;
 		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
 		result = prime * result + ((confirmPassword == null) ? 0 : confirmPassword.hashCode());
-		result = prime * result + Arrays.hashCode(data);
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((fileDownloadUri == null) ? 0 : fileDownloadUri.hashCode());
 		result = prime * result + ((fileType == null) ? 0 : fileType.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((photoName == null) ? 0 : photoName.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + (int) (size ^ (size >>> 32));
 		return result;
 	}
 
@@ -207,7 +140,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserDto other = (UserDto) obj;
 		if (birthday == null) {
 			if (other.birthday != null)
 				return false;
@@ -218,12 +151,15 @@ public class User {
 				return false;
 		} else if (!confirmPassword.equals(other.confirmPassword))
 			return false;
-		if (!Arrays.equals(data, other.data))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
+			return false;
+		if (fileDownloadUri == null) {
+			if (other.fileDownloadUri != null)
+				return false;
+		} else if (!fileDownloadUri.equals(other.fileDownloadUri))
 			return false;
 		if (fileType == null) {
 			if (other.fileType != null)
@@ -234,11 +170,6 @@ public class User {
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
@@ -255,19 +186,22 @@ public class User {
 				return false;
 		} else if (!photoName.equals(other.photoName))
 			return false;
-		if (role != other.role)
+		if (size != other.size)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", birthday=" + birthday + ", password=" + password + ", confirmPassword=" + confirmPassword
-				+ ", photoName=" + photoName + ", fileType=" + fileType + ", role=" + role + ", data="
-				+ Arrays.toString(data) + "]";
+		return "UserDto [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", birthday="
+				+ birthday + ", password=" + password + ", confirmPassword=" + confirmPassword + ", photoName="
+				+ photoName + ", fileDownloadUri=" + fileDownloadUri + ", fileType=" + fileType + ", size=" + size
+				+ "]";
 	}
-
+	
+	
+	
+	
 	
 
 }
