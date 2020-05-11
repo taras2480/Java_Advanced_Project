@@ -49,20 +49,33 @@
 
 				</c:if>
 				
-				<form:form method="POST" action="${contextPath}/addFaculty" modelAttribute="faculty">
+				<form:form method="POST" action="${contextPath}/addFaculty"
+					enctype="multipart/form-data">
 					<table>
 						<tr>
-							<td><form:label path="nameFaculty">Name of Faculty</form:label></td>
-							<td><form:input path="nameFaculty" /></td>
+							<td>Name</td>
+							<td><input type="text" name="nameFaculty" /></td>
 						</tr>
 						<tr>
-							<td><form:label path="amountOfStudents">Max allowed students</form:label></td>
-							<td><form:input path="amountOfStudents" /></td>
+							<td>Max allowed entrants</td>
+							<td><input type="number" name="amountOfStudents" /></td>
 						</tr>
 						<tr>
-							<td><form:label path="subjects">Subjects</form:label></td>
-							<td><form:input path="subjects" /></td>
+							<td>Subjects</td>
+							<td><input type="text" name="subjects" /></td>
 						</tr>
+						<tr>
+							<td>Upload foto</td>
+							<td><input type="file" name="image" /></td>
+						</tr>
+						<!-- <tr>
+							<td>Upload copy of Passport</td>
+							<td><input type="file" name="image" /></td>
+						</tr>
+						<tr>
+							<td>Upload copy of Attestation</td>
+							<td><input type="file" name="image" /></td>
+						</tr> -->
 						<tr>
 							<td><input type="submit" value="Submit" /></td>
 						</tr>

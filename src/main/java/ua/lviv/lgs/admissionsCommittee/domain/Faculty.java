@@ -1,13 +1,11 @@
 package ua.lviv.lgs.admissionsCommittee.domain;
 
-import java.util.List;
-
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -24,9 +22,14 @@ public class Faculty {
 	@Column
 	private Integer amountOfStudents;
 	
-	@ElementCollection  
-    @Column(name="subjects", length=50)
-	private List<SubjectsOfAttestation> subjects;
+//	@ElementCollection  
+//    @Column(name="subjects", length=50)
+//	private List<SubjectsOfAttestation> subjects;
+	
+	private String subjects;
+	
+	@Lob
+	private String encodedImage;
 	
 	
 
@@ -34,14 +37,14 @@ public class Faculty {
 
 	}
 
-	public Faculty(String nameFaculty, Integer amountOfStudents, List<SubjectsOfAttestation> subjects) {
+	public Faculty(String nameFaculty, Integer amountOfStudents,String subjects) {
 		super();
 		this.nameFaculty = nameFaculty;
 		this.amountOfStudents = amountOfStudents;
 		this.subjects = subjects;
 	}
 
-	public Faculty(Integer id, String nameFaculty, Integer amountOfStudents, List<SubjectsOfAttestation> subjects) {
+	public Faculty(Integer id, String nameFaculty, Integer amountOfStudents, String subjects) {
 		super();
 		this.id = id;
 		this.nameFaculty = nameFaculty;
@@ -50,9 +53,6 @@ public class Faculty {
 	}
 	
 	
-	
-	
-
 	public Integer getId() {
 		return id;
 	}
@@ -77,12 +77,22 @@ public class Faculty {
 		this.amountOfStudents = amountOfStudents;
 	}
 
-	public List<SubjectsOfAttestation> getSubjects() {
+	public String getSubjects() {
 		return subjects;
 	}
 
-	public void setSubjects(List<SubjectsOfAttestation> subjects) {
+	public void setSubjects(String subjects) {
 		this.subjects = subjects;
+	}
+	
+	
+
+	public String getEncodedImage() {
+		return encodedImage;
+	}
+
+	public void setEncodedImage(String encodedImage) {
+		this.encodedImage = encodedImage;
 	}
 
 	@Override
