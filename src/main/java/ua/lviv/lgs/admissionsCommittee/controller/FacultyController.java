@@ -20,10 +20,10 @@ public class FacultyController {
 	private FacultyService facultyService;
 
 	@RequestMapping(value = "/addFaculty", method = RequestMethod.POST)
-	public ModelAndView createFaculty(@RequestParam String nameFaculty, @RequestParam Integer amountOfStudents,
-			@RequestParam String subjects,@RequestParam MultipartFile image ) throws IOException {
+	public ModelAndView createFaculty(@RequestParam MultipartFile image, @RequestParam String nameFaculty, @RequestParam Integer amountOfStudents,
+			@RequestParam String subjects) throws IOException {
 
-		facultyService.save(FacultyDTOHelper.createEntity(nameFaculty, amountOfStudents, subjects, image));
+		facultyService.save(FacultyDTOHelper.createEntity(image, nameFaculty, amountOfStudents, subjects));
 		return new ModelAndView("redirect:/home");
 
 	}

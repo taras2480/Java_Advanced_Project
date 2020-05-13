@@ -62,7 +62,6 @@ public class UserController {
 
 	@RequestMapping(value = "/create-faculty", method = RequestMethod.GET)
 	public String createFaculty() {
-//		return new ModelAndView("createFaculty", "faculty", new Faculty());
 		return "createFaculty";
 	}
 

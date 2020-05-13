@@ -25,5 +25,9 @@ public class FacultyService {
 		return facultyRepository.findAll();
 
 	}
+	
+	public Faculty findById(Integer id) {
+		return facultyRepository.findById(id).get();
+	}
 
 }

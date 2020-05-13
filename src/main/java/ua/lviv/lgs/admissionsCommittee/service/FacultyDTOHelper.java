@@ -11,8 +11,8 @@ import ua.lviv.lgs.admissionsCommittee.domain.Faculty;
 
 public class FacultyDTOHelper {
 	
-	public static Faculty createEntity( String nameFaculty,Integer amountOfStudents,
-			String subjects,MultipartFile file ) throws IOException {
+	public static Faculty createEntity(MultipartFile file, String nameFaculty,Integer amountOfStudents,
+			String subjects ) throws IOException {
 		
 		Faculty faculty = new Faculty();
 		faculty.setNameFaculty(nameFaculty);

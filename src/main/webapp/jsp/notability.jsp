@@ -61,33 +61,34 @@
 
 				</c:if>
 
-				<c:if test="${not empty faculties}">
-					<c:forEach items="${faculties}" var="currentFaculty">
-
-						<div class="w3-card-4" style="width: 20%; margin: 2%">
-							<img
-								src="data:image/jpg;base64, ${currentFaculty.encodedImage}"
-								alt="Norway" style="width: 100%">
-							<div class="w3-container w3-center">
-								<h3>${currentFaculty.nameFaculty}</h3>
-								<p>${currentFaculty.amountOfStudents}</p>
-								<p>${currentFaculty.subjects}</p>
-							</div>
-
-							<form:form action="${contextPath}/notability" method="POST" enctype="multipart/form-data">
-								<input type="hidden" value="${currentFaculty.id}"
-									class="form-control" name="facultyId"> 
-									<input type="submit" class="w3-button w3-block w3-dark-grey"
-									value="+ Choose faculty on ${currentFaculty.nameFaculty}">
-							</form:form>
-
-
-
-
-						</div>
-
-					</c:forEach>
-				</c:if>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>Amount Of Students</th>
+							<th>Subjects</th>
+							<th>Image</th>
+							
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="notability" items="${notabilityItems}">
+							<tr>
+								<td>${notability.id}</td>
+								<td>${notability.faculty.nameFaculty}</td>
+								<td>${notability.faculty.amountOfStudents}</td>
+								<td>${notability.faculty.subjects}</td>
+								<td><img
+									src="data:image/jpg;base64,${notability.faculty.encodedImage}"
+									alt="image" style="width: 10%"></td>
+								
+								<td><a href="notability?id= ${notability.id}">delete</a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 
 			</div>
 
