@@ -62,14 +62,14 @@
 							<td>Max allowed entrants</td>
 							<td><input type="number" name="amountOfStudents" /></td>
 						</tr>
-						<tr>
-							<td>Choose subjects: <br><c:if test="${not empty subjects}">
-									<c:forEach items="${subjects}" var="currentSubject">
-										<form:checkbox path="subjects" value="${currentSubject}" />${currentSubject}<br>
-									</c:forEach>
-								</c:if>
-							</td>
-						</tr>
+						
+						<c:forEach items="${subjects}"
+							var="currentSubject">
+							<tr>
+								<td>${currentSubject}</td>
+								<td><input type="number" name="ratings" /></td>
+							</tr>
+						</c:forEach>
 
 						<tr>
 							<td>Approved</td>
