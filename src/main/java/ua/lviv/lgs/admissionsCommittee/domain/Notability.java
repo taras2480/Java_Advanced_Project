@@ -1,5 +1,8 @@
 package ua.lviv.lgs.admissionsCommittee.domain;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,16 +26,9 @@ public class Notability {
 	@ManyToOne
 	@JoinColumn(name = "faculty_id", referencedColumnName = "id")
 	private Faculty faculty;
-
-//	@Column
-//	private Boolean approved;
-//
-//	@ElementCollection  
-//    @Column(name="rating", length=50)
-//	private Map<SubjectsOfAttestation,Integer> rating; 
-//
-//	@Column
-//	private Integer summaryRating;
+	
+	@Column(name = "purchase_date")
+	private Date purchaseDate;
 
 	public Notability() {
 
@@ -43,25 +39,19 @@ public class Notability {
 		this.id = id;
 	}
 
-
-
-	public Notability(User user, Faculty faculty) {
+	public Notability(User user, Faculty faculty, Date purchaseDate) {
 		super();
 		this.user = user;
 		this.faculty = faculty;
-//		this.approved = approved;
-//		this.rating = rating;
-//		this.summaryRating = summaryRating;
+		this.purchaseDate = purchaseDate;
 	}
 
-	public Notability(Integer id, User user, Faculty faculty) {
+	public Notability(Integer id, User user, Faculty faculty, Date purchaseDate) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.faculty = faculty;
-//		this.approved = approved;
-//		this.rating = rating;
-//		this.summaryRating = summaryRating;
+		this.purchaseDate = purchaseDate;
 	}
 
 	public Integer getId() {
@@ -88,90 +78,64 @@ public class Notability {
 		this.faculty = faculty;
 	}
 
-//	public Boolean getApproved() {
-//		return approved;
-//	}
-//
-//	public void setApproved(Boolean approved) {
-//		this.approved = approved;
-//	}
-//
-//	public Map<SubjectsOfAttestation, Integer> getRating() {
-//		return rating;
-//	}
-//
-//	public void setRating(Map<SubjectsOfAttestation, Integer> rating) {
-//		this.rating = rating;
-//	}
-//
-//	public Integer getSummaryRating() {
-//		return summaryRating;
-//	}
-//
-//	public void setSummaryRating(Integer summaryRating) {
-//		this.summaryRating = summaryRating;
-//	}
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
 
-//	@Override
-//	public int hashCode() {
-//		final int prime = 31;
-//		int result = 1;
-//		result = prime * result + ((approved == null) ? 0 : approved.hashCode());
-//		result = prime * result + ((faculty == null) ? 0 : faculty.hashCode());
-//		result = prime * result + ((id == null) ? 0 : id.hashCode());
-//		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
-//		result = prime * result + ((summaryRating == null) ? 0 : summaryRating.hashCode());
-//		result = prime * result + ((user == null) ? 0 : user.hashCode());
-//		return result;
-//	}
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
 
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Notability other = (Notability) obj;
-//		if (approved == null) {
-//			if (other.approved != null)
-//				return false;
-//		} else if (!approved.equals(other.approved))
-//			return false;
-//		if (faculty == null) {
-//			if (other.faculty != null)
-//				return false;
-//		} else if (!faculty.equals(other.faculty))
-//			return false;
-//		if (id == null) {
-//			if (other.id != null)
-//				return false;
-//		} else if (!id.equals(other.id))
-//			return false;
-//		if (rating == null) {
-//			if (other.rating != null)
-//				return false;
-//		} else if (!rating.equals(other.rating))
-//			return false;
-//		if (summaryRating == null) {
-//			if (other.summaryRating != null)
-//				return false;
-//		} else if (!summaryRating.equals(other.summaryRating))
-//			return false;
-//		if (user == null) {
-//			if (other.user != null)
-//				return false;
-//		} else if (!user.equals(other.user))
-//			return false;
-//		return true;
-//	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((faculty == null) ? 0 : faculty.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((purchaseDate == null) ? 0 : purchaseDate.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Notability other = (Notability) obj;
+		if (faculty == null) {
+			if (other.faculty != null)
+				return false;
+		} else if (!faculty.equals(other.faculty))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (purchaseDate == null) {
+			if (other.purchaseDate != null)
+				return false;
+		} else if (!purchaseDate.equals(other.purchaseDate))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
-		return "Notability [id=" + id + ", user=" + user + ", faculty=" + faculty + 
-				"]";
+		return "Notability [id=" + id + ", user=" + user + ", faculty=" + faculty + ", purchaseDate=" + purchaseDate
+				+ "]";
 	}
+
+
 
 	
 }
