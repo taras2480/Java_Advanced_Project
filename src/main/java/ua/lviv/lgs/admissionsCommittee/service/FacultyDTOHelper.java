@@ -1,7 +1,6 @@
 package ua.lviv.lgs.admissionsCommittee.service;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.HashMap;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -24,9 +23,7 @@ public class FacultyDTOHelper {
 		faculty.setNameFaculty(nameFaculty);
 		faculty.setAmountOfStudents(amountOfStudents);
 		subjectsAndRatings.setSubjectAndRating(subjectAndRating);
-		faculty.setApproved(approved);
-		faculty.setSummaryRating(summaryRating);
-		faculty.setEncodedImage(Base64.getEncoder().encodeToString(file.getBytes()));
+		;
 		return faculty;
 	}
 

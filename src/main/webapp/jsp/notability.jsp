@@ -78,13 +78,13 @@
 							<tr>
 								<td>${notability.id}</td>
 								<td>${notability.faculty.nameFaculty}</td>
-								<td>${notability.faculty.amountOfStudents}</td>
+								<%-- <td>${notability.faculty.amountOfStudents}</td> --%>
 								
-								<td><img
+								<%-- <td><img
 									src="data:image/jpg;base64,${notability.faculty.encodedImage}"
 									alt="image" style="width: 10%"></td>
 								
-								<td><a href="notability?id= ${notability.id}">delete</a></td>
+								<td><a href="notability?id= ${notability.id}">delete</a></td> --%>
 							</tr>
 						</c:forEach>
 					</tbody>

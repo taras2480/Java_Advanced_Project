@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ua.lviv.lgs.admissionsCommittee.domain.Faculty;
+import ua.lviv.lgs.admissionsCommittee.domain.SubjectsOfAttestation;
 import ua.lviv.lgs.admissionsCommittee.domain.User;
 import ua.lviv.lgs.admissionsCommittee.service.FacultyService;
 import ua.lviv.lgs.admissionsCommittee.service.UserService;
@@ -55,14 +57,19 @@ public class UserController {
 	public ModelAndView welcome() {
 
 		ModelAndView map = new ModelAndView("home");
-		map.addObject("faculties",facultyService.getAllFaculty());
+		map.addObject("faculties", facultyService.getAllFaculty());
 
 		return map;
 	}
 
 	@RequestMapping(value = "/create-faculty", method = RequestMethod.GET)
-	public String createFaculty() {
-		return "createFaculty";
+	public ModelAndView createFaculty() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("createFaculty");
+		modelAndView.addObject("subjects", SubjectsOfAttestation.values());
+		modelAndView.addObject("faculty", new Faculty());
+
+		return modelAndView;
 	}
 
 }

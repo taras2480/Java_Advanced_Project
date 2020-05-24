@@ -7,6 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>University-x</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 </head>
 <body>
 
@@ -52,7 +53,7 @@
 				</c:if>
 
 				<form:form method="POST" action="${contextPath}/addFaculty"
-					enctype="multipart/form-data">
+					 modelAttribute="faculty">
 					<table>
 						<tr>
 							<td>Name</td>
@@ -62,31 +63,16 @@
 							<td>Max allowed entrants</td>
 							<td><input type="number" name="amountOfStudents" /></td>
 						</tr>
-						<c:forEach items="${faculty.subjectsAndRatings.subjectAndRating}"
 						
-							var="contactMap" varStatus="status">
-							<tr>
-								<td>${contactMap.key}</td>
-								<td><input name="contactMap['${contactMap.key}']"
-									value="${contactMap.value}" /></td>
-							</tr>
-						</c:forEach>
-
-
 						<tr>
-							<td>Approved</td>
-							<td><input type="checkbox" name="approved" /></td>
+							<td>Choose subjects: <br><c:if test="${not empty subjects}">
+									<c:forEach items="${subjects}" var="currentSubject">
+										<form:checkbox path="subjects" value="${currentSubject}" />${currentSubject}<br>
+									</c:forEach>
+								</c:if>
+							</td>
 						</tr>
-
-						<tr>
-							<td>Summary Rating</td>
-							<td><input type="number" name="summaryRating" /></td>
-						</tr>
-
-						<tr>
-							<td>Upload foto</td>
-							<td><input type="file" name="image" /></td>
-						</tr>
+						
 						<tr>
 							<td><input type="submit" value="Submit" /></td>
 						</tr>
