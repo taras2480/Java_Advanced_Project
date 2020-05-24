@@ -62,14 +62,16 @@
 							<td>Max allowed entrants</td>
 							<td><input type="number" name="amountOfStudents" /></td>
 						</tr>
+						<c:forEach items="${faculty.subjectsAndRatings.subjectAndRating}"
 						
-						<c:forEach items="${subjects}"
-							var="currentSubject">
+							var="contactMap" varStatus="status">
 							<tr>
-								<td>${currentSubject}</td>
-								<td><input type="number" name="ratings" /></td>
+								<td>${contactMap.key}</td>
+								<td><input name="contactMap['${contactMap.key}']"
+									value="${contactMap.value}" /></td>
 							</tr>
 						</c:forEach>
+
 
 						<tr>
 							<td>Approved</td>

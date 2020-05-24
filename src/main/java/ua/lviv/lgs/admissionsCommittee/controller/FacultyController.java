@@ -1,7 +1,7 @@
 package ua.lviv.lgs.admissionsCommittee.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,11 +23,10 @@ public class FacultyController {
 
 	@RequestMapping(value = "/addFaculty", method = RequestMethod.POST)
 	public ModelAndView createFaculty(@RequestParam MultipartFile image, @RequestParam String nameFaculty,
-			@RequestParam Integer amountOfStudents, @RequestParam List<SubjectsOfAttestation> subjects,
-			@RequestParam List<Integer> ratings, @RequestParam Boolean approved, @RequestParam Integer summaryRating)
+			@RequestParam Integer amountOfStudents,@RequestParam HashMap<SubjectsOfAttestation,Integer> subjectAndRating, @RequestParam Boolean approved, @RequestParam Integer summaryRating)
 			throws IOException {
 
-		facultyService.save(FacultyDTOHelper.createEntity(image, nameFaculty, amountOfStudents, subjects,ratings,approved,summaryRating));
+		facultyService.save(FacultyDTOHelper.createEntity(image, nameFaculty, amountOfStudents,subjectAndRating,approved,summaryRating));
 		return new ModelAndView("redirect:/home");
 
 	}

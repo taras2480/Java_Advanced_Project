@@ -67,7 +67,7 @@
 							<th>Id</th>
 							<th>Name</th>
 							<th>Amount Of Students</th>
-							<th>Subjects</th>
+							
 							<th>Image</th>
 							
 							<th>Action</th>
@@ -79,7 +79,7 @@
 								<td>${notability.id}</td>
 								<td>${notability.faculty.nameFaculty}</td>
 								<td>${notability.faculty.amountOfStudents}</td>
-								<td>${notability.faculty.subjects}</td>
+								
 								<td><img
 									src="data:image/jpg;base64,${notability.faculty.encodedImage}"
 									alt="image" style="width: 10%"></td>

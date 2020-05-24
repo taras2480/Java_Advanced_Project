@@ -71,7 +71,7 @@
 							<div class="w3-container w3-center">
 								<h3>${currentFaculty.nameFaculty}</h3>
 								<p>${currentFaculty.amountOfStudents}</p>
-								<p>${currentFaculty.subjects}</p>
+								
 							</div>
 
 							<form:form action="${contextPath}/notability" method="POST" enctype="multipart/form-data">
