@@ -30,9 +30,7 @@
 				&times;</button>
 			<a href="/home" class="w3-bar-item w3-button">Home</a> <a
 				href="create-faculty" class="w3-bar-item w3-button">Create
-				faculty</a>
-			 <a href="/notabilities"
-				class="w3-bar-item w3-button">Notability</a> 
+				faculty</a> <a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
 		</div>
 
 		<div id="main">
@@ -61,34 +59,64 @@
 
 				</c:if>
 
-				<table class="table table-striped">
-					<thead>
+				<c:if test="${not empty notabilities}">
+					<table style="width: 100%; border: 1px solid green;">
+
 						<tr>
-							<th>Id</th>
-							<th>Name</th>
-							<th>Amount Of Students</th>
-							
-							<th>Image</th>
-							
-							<th>Action</th>
+							<th style="text-align: center;">Documents</th>
+							<th style="text-align: center;">First name</th>
+							<th style="text-align: center;">Last name</th>
+							<th style="text-align: center;">Email</th>
+							<th style="text-align: center;">Birthday</th>
+							<th style="text-align: center;">Faculty name</th>
+							<th style="text-align: center;">Max allowed students</th>
+							<th style="text-align: center;">Subjects and ratings</th>
+							<th style="color: blue; text-align: center;">Summary rating</th>
+
 						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="notability" items="${notabilityItems}">
+						<c:forEach items="${notabilities}" var="currentNotabilities">
 							<tr>
-								<td>${notability.id}</td>
-								<td>${notability.faculty.nameFaculty}</td>
-								<%-- <td>${notability.faculty.amountOfStudents}</td> --%>
+								<td rowspan="2"><img
+									src="data:image/png;base64,${currentNotabilities.encodedEntrantImage}"
+									width="60" /></td>
+								<td rowspan="2">${currentNotabilities.user.firstName}</td>
+								<td rowspan="2">${currentNotabilities.user.lastName}</td>
+								<td rowspan="2">${currentNotabilities.user.email}</td>
+								<td rowspan="2">${currentNotabilities.user.birthday}</td>
+								<td rowspan="2">${currentNotabilities.faculty.nameFaculty}</td>
+								<td rowspan="2">${currentNotabilities.faculty.amountOfStudents}</td>
+
+
+								<c:forEach items="${currentNotabilities.faculty.subjects}"
+									var="currentSubject">
+									<td>${currentSubject}</td>
+								</c:forEach>
+
+
+							<tr>
+								<td><input type="hidden" name="facultyId"
+									value="${notability.faculty.id}" /></td>
+							<td><input type="hidden" name="userEmail"
+									value="${notability.user.email}" /></td>
+						</tr></tr>
+							
+
+							<tr>
+								<c:forEach items="${currentNotabilities.ratings}"
+									var="currentRatings">
+									<td>${currentRatings}</td>
+								</c:forEach>
+
+								<td style="color: blue;font-weight: bold;">${currentNotabilities.sumRating}</td>
+
 								
-								<%-- <td><img
-									src="data:image/jpg;base64,${notability.faculty.encodedImage}"
-									alt="image" style="width: 10%"></td>
-								
-								<td><a href="notability?id= ${notability.id}">delete</a></td> --%>
+
 							</tr>
+
+
 						</c:forEach>
-					</tbody>
-				</table>
+					</table>
+				</c:if>
 
 			</div>
 

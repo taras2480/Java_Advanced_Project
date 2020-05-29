@@ -21,7 +21,8 @@
 				&times;</button>
 			<a href="/home" class="w3-bar-item w3-button">Home</a> <a
 				href="create-faculty" class="w3-bar-item w3-button">Create
-				faculty</a>
+				faculty</a><a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
+				<a href="/showHappyStudents" class="w3-bar-item w3-button">Future Students</a>
 			<!-- <a href="#"
 				class="w3-bar-item w3-button">Link 3</a> -->
 		</div>
