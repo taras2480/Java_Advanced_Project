@@ -69,8 +69,8 @@ public class NotabilityController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/showHappyStudents", method = RequestMethod.POST)
-	public ModelAndView showHappyStudents(@RequestParam  Integer facultyId) {
+	@RequestMapping(value = "/showHappyStudents", method = RequestMethod.GET)
+	public List<Notability> showHappyStudents(@RequestParam  Integer facultyId) {
 		Faculty faculty = facultyService.findById(facultyId);
 		ModelAndView modelAndView = new ModelAndView("showHappyStudents");
 		modelAndView.addObject("faculty", faculty);
@@ -86,7 +86,7 @@ public class NotabilityController {
 		}
 		modelAndView.addObject("approvedEntrants", approvedEntrants);
 		
-		return  modelAndView;
+		return  approvedEntrants;
 	}
 	
 	
