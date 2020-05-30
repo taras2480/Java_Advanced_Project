@@ -59,21 +59,22 @@
 
 				</c:if>
 
-				<c:if test="${not empty notabilities}">
-					<table style="width: 100%; border: 1px solid green;">
 
+				<table>
+					<thead>
 						<tr>
-							<th style="text-align: center;">Documents</th>
-							<th style="text-align: center;">First name</th>
-							<th style="text-align: center;">Last name</th>
-							<th style="text-align: center;">Email</th>
-							<th style="text-align: center;">Birthday</th>
-							<th style="text-align: center;">Faculty name</th>
-							<th style="text-align: center;">Max allowed students</th>
-							<th style="text-align: center;">Subjects and ratings</th>
-							<th style="color: blue; text-align: center;">Summary rating</th>
-
+							<th>Documents</th>
+							<th>First name</th>
+							<th>Last name</th>
+							<th>Email</th>
+							<th>Birthday</th>
+							<th>Faculty name</th>
+							<th>Max allowed students</th>
+							<th>Subjects and ratings</th>
+							<th style="color: blue;">Summary rating</th>
 						</tr>
+					</thead>
+					<tbody>
 						<c:forEach items="${notabilities}" var="currentNotabilities">
 							<tr>
 								<td rowspan="2"><img
@@ -93,30 +94,31 @@
 								</c:forEach>
 
 
-							<tr>
-								<td><input type="hidden" name="facultyId"
-									value="${notability.faculty.id}" /></td>
-							<td><input type="hidden" name="userEmail"
-									value="${notability.user.email}" /></td>
-						</tr></tr>
-							
+								<td rowspan="2"><form:form method="POST"
+										action="${contextPath}/notabilities">
+										<input type="hidden" name="facultyId"
+											value="${notability.faculty.id}" />
+										<input type="hidden" name="userId"
+											value="${notability.user.id}" />
 
+										<button type="submit">Submit</button>
+									</form:form></td>
 							<tr>
 								<c:forEach items="${currentNotabilities.ratings}"
 									var="currentRatings">
 									<td>${currentRatings}</td>
 								</c:forEach>
 
-								<td style="color: blue;font-weight: bold;">${currentNotabilities.sumRating}</td>
+								<td style="color: blue; font-weight: bold;">${currentNotabilities.sumRating}</td>
 
-								
+
 
 							</tr>
 
 
 						</c:forEach>
-					</table>
-				</c:if>
+					</tbody>
+				</table>
 
 			</div>
 

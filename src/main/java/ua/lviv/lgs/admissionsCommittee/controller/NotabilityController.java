@@ -65,47 +65,29 @@ public class NotabilityController {
 	public ModelAndView viewRatings() {
 		ModelAndView modelAndView = new ModelAndView("notabilities");
 		modelAndView.addObject("notabilities", notabilityService.getAllNotabilities());
+		
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/showHappyStudents", method = RequestMethod.GET)
-	public ModelAndView showHappyStudents(@RequestParam ("facultyId") Integer facultyId) {
+	@RequestMapping(value = "/showHappyStudents", method = RequestMethod.POST)
+	public ModelAndView showHappyStudents(@RequestParam  Integer facultyId) {
 		Faculty faculty = facultyService.findById(facultyId);
 		ModelAndView modelAndView = new ModelAndView("showHappyStudents");
 		modelAndView.addObject("faculty", faculty);
 		List<Notability> futureStudents = notabilityService.getAllNotabilities();
-		futureStudents = futureStudents.stream().filter(r -> r.getFaculty().getId() == facultyId)
+		futureStudents = futureStudents.stream().filter(f -> f.getFaculty().getId() == facultyId)
 								.sorted(new RatingsComparator()).collect(Collectors.toList());
 		modelAndView.addObject("amountOfStudent", futureStudents.size());
 		List<Notability> approvedEntrants = futureStudents;;
-		List<Notability> notApprovedEntrants = null;
+		
 		if(faculty.getAmountOfStudents() < futureStudents.size()) {
 			approvedEntrants = futureStudents.subList(0, faculty.getAmountOfStudents());
-			notApprovedEntrants = futureStudents.subList(faculty.getAmountOfStudents(), futureStudents.size());
+			
 		}
 		modelAndView.addObject("approvedEntrants", approvedEntrants);
-		modelAndView.addObject("notApprovedEntrants", notApprovedEntrants);
+		
 		return  modelAndView;
 	}
-
-//	@RequestMapping(value ="/show-happy-students",method = RequestMethod.GET)
-//	public ModelAndView showHappyStudents(@RequestParam Integer facultyId) {
-//		Faculty faculty = facultyService.findById(facultyId);
-//		ModelAndView modelAndView = new ModelAndView("showHappyStudents");
-//		modelAndView.addObject("faculty", faculty);
-//		List<Notability> futureStudents = notabilityService.getAllNotabilities();
-//		futureStudents = futureStudents.stream().filter(r -> r.getFaculty().getId() == facultyId)
-//								.sorted(new RatingsComparator()).collect(Collectors.toList());
-//		modelAndView.addObject("amountOfStudent", futureStudents.size());
-//		List<Notability> approvedEntrants = futureStudents;;
-//		List<Notability> notApprovedEntrants = null;
-//		if(faculty.getAmountOfStudents() < futureStudents.size()) {
-//			approvedEntrants = futureStudents.subList(0, faculty.getAmountOfStudents());
-//			notApprovedEntrants = futureStudents.subList(faculty.getAmountOfStudents(), futureStudents.size());
-//		}
-//		modelAndView.addObject("approvedEntrants", approvedEntrants);
-//		modelAndView.addObject("notApprovedEntrants", notApprovedEntrants);
-//		return  modelAndView;
-//	}
-
+	
+	
 }

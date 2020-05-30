@@ -21,9 +21,8 @@
 				&times;</button>
 			<a href="/home" class="w3-bar-item w3-button">Home</a> <a
 				href="create-faculty" class="w3-bar-item w3-button">Create
-				faculty</a>
-			<!-- <a href="#"
-				class="w3-bar-item w3-button">Link 3</a> -->
+				faculty</a><a href="showHappyStudents" class="w3-bar-item w3-button">Future Students</a>
+			
 		</div>
 
 		<div id="main">
@@ -52,40 +51,54 @@
 
 				</c:if>
 
-				<form:form method="POST" action="${contextPath}/addPoints"
-					enctype="multipart/form-data">
-					<table>
+				<c:if test="${not empty notabilities}">
+					<table style="width: 100%; border: 1px solid green;">
+
 						<tr>
-							<td>Added points to subjects</td>
+
+							<th style="text-align: center;">First name</th>
+							<th style="text-align: center;">Last name</th>
+							<th style="text-align: center;">Email</th>
+
+							<th style="color: blue; text-align: center;">Summary rating</th>
 
 						</tr>
-						<c:forEach items="${notability.faculty.subjects}"
-							var="currentSubject">
+						<c:forEach items="${notabilities}" var="currentNotabilities">
 							<tr>
-								<td>${currentSubject}</td>
-								<td><input type="number" name="ratings" /></td>
+
+								<td rowspan="2">${currentNotabilities.user.firstName}</td>
+								<td rowspan="2">${currentNotabilities.user.lastName}</td>
+								<td rowspan="2">${currentNotabilities.user.email}</td>
+
+
+								<td rowspan="2">${currentNotabilities.faculty.amountOfStudents}</td>
+
+
+
+
+
+								<td rowspan="2"><form:form method="POST"
+										action="${contextPath}/notabilities">
+										<input type="hidden" name="facultyId"
+											value="${notability.faculty.id}" />
+										<input type="hidden" name="userId"
+											value="${notability.user.id}" />
+
+										<button type="submit">Submit</button>
+									</form:form></td>
+							<tr>
+
+
+								<td style="color: blue; font-weight: bold;">${currentNotabilities.sumRating}</td>
+
+
+
 							</tr>
+
+
 						</c:forEach>
-
-						<tr>
-							<td>Upload your documents:</td>
-							<td><input type="file" name="image" /></td>
-						</tr>
-						
-						<tr>
-							<td><input type="hidden" name="facultyId"
-								value="${notability.faculty.id}" /></td>
-							<td><input type="hidden" name="userEmail"
-								value="${notability.user.email}" /></td>
-						</tr>
-
-						<tr>
-							<td><input type="submit" value="Submit" /></td>
-						</tr>
 					</table>
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-				</form:form>
+				</c:if>
 
 			</div>
 
