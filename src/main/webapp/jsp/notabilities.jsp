@@ -94,15 +94,14 @@
 								</c:forEach>
 
 
-								<td rowspan="2"><form:form method="POST"
-										action="${contextPath}/notabilities">
-										<input type="hidden" name="facultyId"
-											value="${notability.faculty.id}" />
-										<input type="hidden" name="userId"
-											value="${notability.user.id}" />
-
-										<button type="submit">Submit</button>
-									</form:form></td>
+								<td rowspan="2">
+							<form:form method="POST" action="${contextPath}/entrolled">						
+								<input type="hidden" name="facultyId" value="${currentNotabilities.faculty.id}" />
+								<input type="hidden" name="userId" value="${currentNotabilities.user.id}" />
+								<input type="hidden" name="notabilityId" value="${currentNotabilities.id}" />
+								<button type="submit">Submit</button>
+							</form:form>
+						</td>
 							<tr>
 								<c:forEach items="${currentNotabilities.ratings}"
 									var="currentRatings">

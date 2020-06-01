@@ -3,7 +3,6 @@ package ua.lviv.lgs.admissionsCommittee.controller;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,6 @@ import ua.lviv.lgs.admissionsCommittee.domain.Notability;
 import ua.lviv.lgs.admissionsCommittee.domain.User;
 import ua.lviv.lgs.admissionsCommittee.service.FacultyService;
 import ua.lviv.lgs.admissionsCommittee.service.NotabilityService;
-import ua.lviv.lgs.admissionsCommittee.service.RatingsComparator;
 import ua.lviv.lgs.admissionsCommittee.service.UserService;
 
 @Controller
@@ -61,33 +59,15 @@ public class NotabilityController {
 		return "redirect:/home";
 	}
 
-	@RequestMapping(value = "/notabilities", method = RequestMethod.GET)
-	public ModelAndView viewRatings() {
-		ModelAndView modelAndView = new ModelAndView("notabilities");
-		modelAndView.addObject("notabilities", notabilityService.getAllNotabilities());
-		
-		return modelAndView;
-	}
 	
-	@RequestMapping(value = "/showHappyStudents", method = RequestMethod.GET)
-	public List<Notability> showHappyStudents(@RequestParam  Integer facultyId) {
-		Faculty faculty = facultyService.findById(facultyId);
-		ModelAndView modelAndView = new ModelAndView("showHappyStudents");
-		modelAndView.addObject("faculty", faculty);
-		List<Notability> futureStudents = notabilityService.getAllNotabilities();
-		futureStudents = futureStudents.stream().filter(f -> f.getFaculty().getId() == facultyId)
-								.sorted(new RatingsComparator()).collect(Collectors.toList());
-		modelAndView.addObject("amountOfStudent", futureStudents.size());
-		List<Notability> approvedEntrants = futureStudents;;
-		
-		if(faculty.getAmountOfStudents() < futureStudents.size()) {
-			approvedEntrants = futureStudents.subList(0, faculty.getAmountOfStudents());
-			
-		}
-		modelAndView.addObject("approvedEntrants", approvedEntrants);
-		
-		return  approvedEntrants;
-	}
+	 @RequestMapping(value = "/notabilities", method = RequestMethod.GET) public
+	  ModelAndView viewRatings() { ModelAndView modelAndView = new
+	  ModelAndView("notabilities"); modelAndView.addObject("notabilities",
+	 notabilityService.getAllNotabilities());
+	 
+	 return modelAndView; }
+
 	
+
 	
 }

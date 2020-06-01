@@ -31,7 +31,8 @@
 			<a href="/home" class="w3-bar-item w3-button">Home</a> <a
 				href="create-faculty" class="w3-bar-item w3-button">Create
 				faculty</a> <a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
-				<a href="/showHappyStudents" class="w3-bar-item w3-button">Future Students</a>
+			<a href="/showHappyStudents" class="w3-bar-item w3-button">Future
+				Students</a>
 		</div>
 
 		<div id="main">
@@ -64,7 +65,7 @@
 					<c:forEach items="${faculties}" var="currentFaculty">
 
 						<div class="w3-card-4" style="width: 20%; margin: 2%">
-							
+
 							<div class="w3-container w3-center">
 								<h3>${currentFaculty.nameFaculty}</h3>
 								<h4>Max allowed Students:
@@ -82,6 +83,7 @@
 							<a
 								href="enrollmenToFaculty?currentId=${currentFaculty.id}&currentUserEmail=${pageContext.request.userPrincipal.name}"
 								class="btn btn-primary">Choose this faculty</a>
+								<a href="showHappyStudents?currentFacultyId=${currentFaculty.id}">Show Happy Students</a>
 
 
 

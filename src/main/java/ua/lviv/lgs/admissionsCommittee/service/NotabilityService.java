@@ -19,14 +19,18 @@ public class NotabilityService {
 		return notabilityRepository.findAll();
 	}
 	
-	public void delete(Notability notability) {
+	public void delete(Integer id) {
 		
-		notabilityRepository.delete(notability);
+		notabilityRepository.deleteById(id);
 	}
 	
 	public Notability add(Notability notability) {
 		
 		return notabilityRepository.save(notability);
+	}
+	
+	public Notability findById(Integer id) {
+		return notabilityRepository.findById(id).get();
 	}
 
 }
