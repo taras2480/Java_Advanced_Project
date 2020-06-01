@@ -63,7 +63,7 @@ public class HappyFutureStudentsController {
 		
 		List<HappyFutureStudents> ofCurrentFaculty = allHappyFutureStudents.stream().filter(s -> facultyService.findById(s.getFacultyId()).getNameFaculty().equals(currentFaculty.getNameFaculty())).collect(Collectors.toList());
 		
-		System.out.println("BEFORE sorting: " + ofCurrentFaculty);
+		
 		
 		Collections.sort(ofCurrentFaculty);
 
@@ -72,7 +72,7 @@ public class HappyFutureStudentsController {
 				happyFutureStudents.setApproved(true);
 		});
 
-		System.out.println("After sorting and rating: " + ofCurrentFaculty);
+		
 
 		List<User> usersCurrentFaculty = ofCurrentFaculty.stream().map(o -> userService.findById(o.getUserId())).collect(Collectors.toList());
 		List<Boolean> isApproved = ofCurrentFaculty.stream().map(o -> o.isApproved()).collect(Collectors.toList());

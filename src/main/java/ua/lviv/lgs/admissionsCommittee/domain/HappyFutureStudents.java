@@ -28,6 +28,8 @@ public class HappyFutureStudents implements Comparable<HappyFutureStudents> {
 	@ElementCollection
 	@Column(name = "statement_ratings")
 	private List<Integer> statementRatings;
+	
+	private Integer summaryRaiting;
 
 	@Transient
 	private boolean approved;
@@ -92,6 +94,22 @@ public class HappyFutureStudents implements Comparable<HappyFutureStudents> {
 
 	public void setApproved(boolean approved) {
 		this.approved = approved;
+	}
+	
+	
+
+	public Integer getSummaryRaiting() {
+		summaryRaiting=0;
+		for (Integer rating : statementRatings) {
+
+			summaryRaiting = summaryRaiting + rating;
+			
+		}
+		return summaryRaiting;
+	}
+
+	public void setSummaryRaiting(Integer summaryRaiting) {
+		this.summaryRaiting = summaryRaiting;
 	}
 
 	@Override

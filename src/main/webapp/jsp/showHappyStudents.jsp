@@ -40,6 +40,7 @@ th, td, h2 {
 </head>
 
 <body>
+
 	<c:forEach var="element" items="${List1}" varStatus="status">
 		<p>${element}${List2[status.index]}
 	</c:forEach>
@@ -51,28 +52,35 @@ th, td, h2 {
 		<table style="width: 60%">
 			<tr>
 				<th>First name</th>
-				<th>Second name</th>
-				<th colspan="4">Ratings</th>
+				<th>Last name</th>
+				<th colspan="30">Ratings</th>
+				<th>Approved or not</th>
+				<th style="color: blue; font-weight: bold;">Sum Rating</th>
 				
 			</tr>
 			<c:forEach items="${happyFutureStudentss}" var="currentStudents"
 				varStatus="status">
-				<tr>
+				<tr >
 					<td rowspan="2">${users[status.index].firstName}</td>
 					<td rowspan="2">${users[status.index].lastName}</td>
 
 					<c:forEach items="${faculty.subjects}" var="currentSubject">
-						<td>${currentSubject}</td>
+						<td colspan="6">${currentSubject}</td>
 					</c:forEach>
-
+					
 					<td rowspan="2">${accepting[status.index]}</td>
+
+					
 				</tr>
 				<tr>
 					<c:forEach items="${currentStudents.statementRatings}"
-						var="currentStatementMark">
-						<td>${currentStatementMark}</td>
+						var="currentRatings">
+						<td colspan="6">${currentRatings}</td>
 					</c:forEach>
+					<td style="color: blue; font-weight: bold;">${currentStudents.summaryRaiting}</td>
+					
 				</tr>
+				
 			</c:forEach>
 		</table>
 	</c:if>
