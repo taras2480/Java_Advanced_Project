@@ -46,6 +46,17 @@ public class User {
 
 	}
 	
+	
+	
+	public User(Integer id, String firstName, String lastName) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+
+
 	public User(User user) {
 		this.id = user.id;
 		this.email = user.email;

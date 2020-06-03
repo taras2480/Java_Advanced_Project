@@ -15,19 +15,14 @@ import ua.lviv.lgs.admissionsCommittee.service.FacultyService;
 
 @Controller
 public class FacultyController {
-	
+
 	@Autowired
 	private FacultyService facultyService;
-	
-	@RequestMapping(value="addFaculty", method=RequestMethod.POST)
-	public ModelAndView createFaculty(@Valid @ModelAttribute("faculty") Faculty faculty,BindingResult bindingResult) {
-		
-		facultyService.save(faculty);
-		ModelAndView map = new ModelAndView("home");
-		map.addObject("faculties",facultyService.getAllFaculty());
 
+	@RequestMapping(value = "/addFaculty", method = RequestMethod.POST)
+	public ModelAndView createFaculty(@Valid @ModelAttribute("faculty") Faculty faculty, BindingResult bindingResult) {
+		facultyService.save(faculty);
 		return new ModelAndView("redirect:/home");
-						
 	}
 
 }

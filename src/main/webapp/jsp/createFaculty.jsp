@@ -7,19 +7,23 @@
 <meta charset="ISO-8859-1">
 <title>University-x</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 </head>
 <body>
 
-<div class="container">
-	
+	<div class="container">
+
 
 		<div class="w3-sidebar w3-bar-block w3-card w3-animate-left"
 			style="display: none" id="mySidebar">
-			
+
 			<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close
 				&times;</button>
-			<a href="/home" class="w3-bar-item w3-button">Home</a> <a href="create-faculty"
-				class="w3-bar-item w3-button">Create faculty</a> <!-- <a href="#"
+			<a href="/home" class="w3-bar-item w3-button">Home</a> <a
+				href="create-faculty" class="w3-bar-item w3-button">Create
+				faculty</a><a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
+				<a href="/showHappyStudents" class="w3-bar-item w3-button">Future Students</a>
+			<!-- <a href="#"
 				class="w3-bar-item w3-button">Link 3</a> -->
 		</div>
 
@@ -27,15 +31,15 @@
 
 			<div class="w3-teal">
 				<button id="openNav" class="w3-button w3-teal w3-xlarge"
-					onclick="w3_open()">&#9776;  Create faculty</button>
+					onclick="w3_open()">&#9776; Create faculty</button>
 				<div class="w3-container">
 					<h1>Registration entrant</h1>
 				</div>
 			</div>
 
-			
+
 			<div class="w3-container">
-				
+
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
 					<form id="logoutForm" method="POST" action="${contextPath}/logout">
 						<input type="hidden" name="${_csrf.parameterName}"
@@ -48,21 +52,28 @@
 					</h2>
 
 				</c:if>
-				
-				<form:form method="POST" action="${contextPath}/addFaculty" modelAttribute="faculty">
+
+				<form:form method="POST" action="${contextPath}/addFaculty"
+					 modelAttribute="faculty">
 					<table>
 						<tr>
-							<td><form:label path="nameFaculty">Name of Faculty</form:label></td>
-							<td><form:input path="nameFaculty" /></td>
+							<td>Name</td>
+							<td><input type="text" name="nameFaculty" /></td>
 						</tr>
 						<tr>
-							<td><form:label path="amountOfStudents">Max allowed students</form:label></td>
-							<td><form:input path="amountOfStudents" /></td>
+							<td>Max allowed entrants</td>
+							<td><input type="number" name="amountOfStudents" /></td>
 						</tr>
+						
 						<tr>
-							<td><form:label path="subjects">Subjects</form:label></td>
-							<td><form:input path="subjects" /></td>
+							<td>Choose subjects: <br><c:if test="${not empty subjects}">
+									<c:forEach items="${subjects}" var="currentSubject">
+										<form:checkbox path="subjects" value="${currentSubject}" />${currentSubject}<br>
+									</c:forEach>
+								</c:if>
+							</td>
 						</tr>
+						
 						<tr>
 							<td><input type="submit" value="Submit" /></td>
 						</tr>
@@ -70,7 +81,7 @@
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 				</form:form>
-				
+
 			</div>
 
 		</div>
@@ -88,10 +99,10 @@
 				document.getElementById("openNav").style.display = "inline-block";
 			}
 		</script>
-		
+
 		<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-</div>
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+	</div>
 </body>
 </html>
