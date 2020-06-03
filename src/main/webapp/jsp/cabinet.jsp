@@ -72,38 +72,58 @@
 
 				</c:if>
 
-				<c:if test="${not empty faculties}">
-					<c:forEach items="${faculties}" var="currentFaculty">
 
-						<div class="w3-card-4" style="width: 20%; margin: 2%">
+				<table>
+					<thead>
+						<tr>
+							<th>Documents</th>
+							<th>First name</th>
+							<th>Last name</th>
+							<th>Email</th>
+							<th>Birthday</th>
+							<th>Faculty name</th>
+							<th>Max allowed students</th>
+							<th>Subjects and ratings</th>
+							<th style="color: blue;">Summary rating</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${notabilities}" var="currentNotabilities">
+							<tr>
+								<td rowspan="2"><img
+									src="data:image/png;base64,${currentNotabilities.encodedEntrantImage}"
+									width="60" /></td>
+								<td rowspan="2">${currentNotabilities.user.firstName}</td>
+								<td rowspan="2">${currentNotabilities.user.lastName}</td>
+								<td rowspan="2">${currentNotabilities.user.email}</td>
+								<td rowspan="2">${currentNotabilities.user.birthday}</td>
+								<td rowspan="2">${currentNotabilities.faculty.nameFaculty}</td>
+								<td rowspan="2">${currentNotabilities.faculty.amountOfStudents}</td>
 
-							<div class="w3-container w3-center">
-								<h3>${currentFaculty.nameFaculty}</h3>
-								<h4>Max allowed Students:
-									${currentFaculty.amountOfStudents}</h4>
-								<h4>
-									Subjects for admission :<br>
-								</h4>
-								<c:forEach items="${currentFaculty.subjects}"
+
+								<c:forEach items="${currentNotabilities.faculty.subjects}"
 									var="currentSubject">
-									<p>${currentSubject}</p>
+									<td>${currentSubject}</td>
 								</c:forEach>
 
-							</div>
 
-							<a
-								href="enrollmenToFaculty?currentId=${currentFaculty.id}&currentUserEmail=${pageContext.request.userPrincipal.name}"
-								class="btn btn-primary">Choose this faculty</a> <a
-								href="showHappyStudents?currentFacultyId=${currentFaculty.id}">Show
-								Happy Students</a>
+								
+							<tr>
+								<c:forEach items="${currentNotabilities.ratings}"
+									var="currentRatings">
+									<td>${currentRatings}</td>
+								</c:forEach>
+
+								<td style="color: blue; font-weight: bold;">${currentNotabilities.sumRating}</td>
 
 
 
+							</tr>
 
-						</div>
 
-					</c:forEach>
-				</c:if>
+						</c:forEach>
+					</tbody>
+				</table>
 
 			</div>
 

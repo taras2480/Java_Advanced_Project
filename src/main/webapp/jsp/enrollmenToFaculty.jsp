@@ -31,6 +31,10 @@
 			<security:authorize access="hasRole('ROLE_ADMIN')">
 				<a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
 			</security:authorize>
+			
+			<security:authorize access="hasRole('ROLE_USER')">
+				<a href="cabinet" class="w3-bar-item w3-button">Cabinet</a>
+			</security:authorize>
 			<!-- <a href="#"
 				class="w3-bar-item w3-button">Link 3</a> -->
 		</div>

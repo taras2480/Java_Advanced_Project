@@ -66,6 +66,13 @@ public class NotabilityController {
 	 notabilityService.getAllNotabilities());
 	 
 	 return modelAndView; }
+	 
+	 @RequestMapping(value = "/cabinet", method = RequestMethod.GET) public
+	  ModelAndView cabinet() { ModelAndView modelAndView = new
+	  ModelAndView("cabinet"); modelAndView.addObject("notabilities",
+	 notabilityService.getAllNotabilities());
+	 
+	 return modelAndView; }
 
 	
 
