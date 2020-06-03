@@ -1,6 +1,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -28,9 +30,16 @@
 
 			<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close
 				&times;</button>
-			<a href="/home" class="w3-bar-item w3-button">Home</a> <a
-				href="create-faculty" class="w3-bar-item w3-button">Create
-				faculty</a> <a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
+			<a href="/home" class="w3-bar-item w3-button">Home</a>
+			<security:authorize access="hasRole('ROLE_ADMIN')">
+				<a href="create-faculty" class="w3-bar-item w3-button">Create
+					faculty</a>
+			</security:authorize>
+
+
+			<security:authorize access="hasRole('ROLE_ADMIN')">
+				<a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
+			</security:authorize>
 		</div>
 
 		<div id="main">
@@ -94,14 +103,16 @@
 								</c:forEach>
 
 
-								<td rowspan="2">
-							<form:form method="POST" action="${contextPath}/entrolled">						
-								<input type="hidden" name="facultyId" value="${currentNotabilities.faculty.id}" />
-								<input type="hidden" name="userId" value="${currentNotabilities.user.id}" />
-								<input type="hidden" name="notabilityId" value="${currentNotabilities.id}" />
-								<button type="submit">Submit</button>
-							</form:form>
-						</td>
+								<td rowspan="2"><form:form method="POST"
+										action="${contextPath}/entrolled">
+										<input type="hidden" name="facultyId"
+											value="${currentNotabilities.faculty.id}" />
+										<input type="hidden" name="userId"
+											value="${currentNotabilities.user.id}" />
+										<input type="hidden" name="notabilityId"
+											value="${currentNotabilities.id}" />
+										<button type="submit">Submit</button>
+									</form:form></td>
 							<tr>
 								<c:forEach items="${currentNotabilities.ratings}"
 									var="currentRatings">
