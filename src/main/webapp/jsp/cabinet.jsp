@@ -28,20 +28,20 @@
 		<div class="w3-sidebar w3-bar-block w3-card w3-animate-left"
 			style="display: none" id="mySidebar">
 
-			<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Hide menu
+			<button class="w3-bar-item w3-button w3-large" onclick="w3_close()"><spring:message code='login.hide_menu'/>
 				&times;</button>
-			<a href="/home" class="w3-bar-item w3-button">Home</a>
+			<a href="/home" class="w3-bar-item w3-button"><spring:message code='home.home'/></a>
 			<security:authorize access="hasRole('ROLE_ADMIN')">
-				<a href="create-faculty" class="w3-bar-item w3-button">Create faculty</a>
+				<a href="create-faculty" class="w3-bar-item w3-button"><spring:message code='home.create_faculty'/></a>
 			</security:authorize>
 
 
 			<security:authorize access="hasRole('ROLE_ADMIN')">
-				<a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
+				<a href="/notabilities" class="w3-bar-item w3-button"><spring:message code='home.notability'/></a>
 			</security:authorize>
 			
 			<security:authorize access="hasRole('ROLE_USER')">
-				<a href="cabinet" class="w3-bar-item w3-button">Cabinet</a>
+				<a href="cabinet" class="w3-bar-item w3-button"><spring:message code='home.cabinet'/></a>
 			</security:authorize>
 		</div>
 
@@ -49,9 +49,9 @@
 
 			<div class="w3-teal">
 				<button id="openNav" class="w3-button w3-teal w3-xlarge"
-					onclick="w3_open()">&#9776; Menu</button>
+					onclick="w3_open()">&#9776; <spring:message code='home.menu'/></button>
 				<div class="w3-container">
-					<h1>Registration entrant</h1>
+					<h1><spring:message code='login.registration_entrant'/></h1>
 				</div>
 			</div>
 
@@ -65,8 +65,8 @@
 					</form>
 
 					<h2>
-						Welcome ${pageContext.request.userPrincipal.name} | <a
-							onclick="document.forms['logoutForm'].submit()">Logout</a>
+						<spring:message code='home.welcome'/> ${pageContext.request.userPrincipal.name} | <a
+							onclick="document.forms['logoutForm'].submit()"><spring:message code='home.logout'/></a>
 					</h2>
 
 				</c:if>
@@ -75,15 +75,15 @@
 				<table>
 					<thead>
 						<tr>
-							<th>Documents</th>
-							<th>First name</th>
-							<th>Last name</th>
-							<th>Email</th>
-							<th>Birthday</th>
-							<th>Faculty name</th>
-							<th>Max allowed students</th>
-							<th>Subjects and ratings</th>
-							<th style="color: blue;">Summary rating</th>
+							<th><spring:message code='notability.documents'/></th>
+							<th><spring:message code='notability.first_name'/></th>
+							<th><spring:message code='notability.last_name'/></th>
+							<th><spring:message code='login.email'/></th>
+							<th><spring:message code='notability.birthday'/></th>
+							<th><spring:message code='notability.faculty_name'/></th>
+							<th><spring:message code='notability.max_allowed_students'/></th>
+							<th><spring:message code='notability.subjects_raitings'/></th>
+							<th style="color: blue;"><spring:message code='notability.summary_raiting'/></th>
 						</tr>
 					</thead>
 					<tbody>

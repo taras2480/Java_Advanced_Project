@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -41,9 +43,11 @@ th, td, h2 {
 	<div class="w3-sidebar w3-bar-block w3-card w3-animate-left"
 		style="display: none" id="mySidebar">
 
-		<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Hide menu</button>
-		<a href="/home" class="w3-bar-item w3-button">Home</a> <a
-			href="create-faculty" class="w3-bar-item w3-button">Create faculty</a> <a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
+		<button class="w3-bar-item w3-button w3-large" onclick="w3_close()"><spring:message code='login.hide_menu'/></button>
+		<a href="/home" class="w3-bar-item w3-button"><spring:message code='home.home'/></a> <a
+			href="create-faculty" class="w3-bar-item w3-button"><spring:message
+				code='home.create_faculty' /></a> <a href="/notabilities" class="w3-bar-item w3-button"><spring:message
+				code='home.notability' /></a>
 	</div>
 
 	
