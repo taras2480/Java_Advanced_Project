@@ -28,12 +28,11 @@
 		<div class="w3-sidebar w3-bar-block w3-card w3-animate-left"
 			style="display: none" id="mySidebar">
 
-			<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close
+			<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Hide menu
 				&times;</button>
 			<a href="/home" class="w3-bar-item w3-button">Home</a>
 			<security:authorize access="hasRole('ROLE_ADMIN')">
-				<a href="create-faculty" class="w3-bar-item w3-button">Create
-					faculty</a>
+				<a href="create-faculty" class="w3-bar-item w3-button">Create faculty</a>
 			</security:authorize>
 
 
@@ -50,7 +49,7 @@
 
 			<div class="w3-teal">
 				<button id="openNav" class="w3-button w3-teal w3-xlarge"
-					onclick="w3_open()">&#9776; Create faculty</button>
+					onclick="w3_open()">&#9776; Menu</button>
 				<div class="w3-container">
 					<h1>Registration entrant</h1>
 				</div>
