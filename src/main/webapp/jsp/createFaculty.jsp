@@ -1,6 +1,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,10 +21,22 @@
 
 			<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close
 				&times;</button>
-			<a href="/home" class="w3-bar-item w3-button">Home</a> <a
-				href="create-faculty" class="w3-bar-item w3-button">Create
-				faculty</a><a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
-				<a href="/showHappyStudents" class="w3-bar-item w3-button">Future Students</a>
+			<a href="/home" class="w3-bar-item w3-button">Home</a>
+
+			<security:authorize access="hasRole('ROLE_ADMIN')">
+				<a href="create-faculty" class="w3-bar-item w3-button">Create
+					faculty</a>
+			</security:authorize>
+
+
+			<security:authorize access="hasRole('ROLE_ADMIN')">
+				<a href="/notabilities" class="w3-bar-item w3-button">Notability</a>
+			</security:authorize>
+			
+			<security:authorize access="hasRole('ROLE_USER')">
+				<a href="cabinet" class="w3-bar-item w3-button">Cabinet</a>
+			</security:authorize>
+
 			<!-- <a href="#"
 				class="w3-bar-item w3-button">Link 3</a> -->
 		</div>
