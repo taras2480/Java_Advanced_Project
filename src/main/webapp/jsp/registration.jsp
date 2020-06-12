@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Upload Data</title>
+    <title>Registration</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 
 <div class="container">
 
-    <form:form method="POST" modelAttribute="userForm" class="form-signin">
-        <h2 class="form-signin-heading">Upload Data</h2>
+    <form:form method="POST" modelAttribute="userForm" class="form-signin ">
+        <h2 class="form-signin-heading">Registration</h2>
         
         <spring:bind path="firstName">
             <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -77,23 +77,7 @@
             </div>
         </spring:bind>
         
-        <%-- <spring:bind path="photoName">
-            <div>
-				
-				<form id="multipleUploadForm" name="multipleUploadForm">
-					<input id="multipleFileUploadInput" type="file" name="files"
-						multiple required />
-					<button type="submit">Submit</button>
-				</form>
-
-				<div>
-					<div id="multipleFileUploadError"></div>
-					<div id="multipleFileUploadSuccess"></div>
-				</div>
-
-			</div>
-        </spring:bind> --%>
-
+        
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
 
