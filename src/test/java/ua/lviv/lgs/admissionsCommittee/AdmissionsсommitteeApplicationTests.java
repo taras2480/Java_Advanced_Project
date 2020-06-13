@@ -20,6 +20,7 @@ import ua.lviv.lgs.admissionsCommittee.dao.UserRepository;
 import ua.lviv.lgs.admissionsCommittee.domain.Faculty;
 import ua.lviv.lgs.admissionsCommittee.domain.HappyFutureStudents;
 import ua.lviv.lgs.admissionsCommittee.domain.Notability;
+import ua.lviv.lgs.admissionsCommittee.domain.TestProvider;
 import ua.lviv.lgs.admissionsCommittee.domain.User;
 import ua.lviv.lgs.admissionsCommittee.domain.UserRole;
 import ua.lviv.lgs.admissionsCommittee.service.FacultyService;
@@ -147,18 +148,26 @@ public class AdmissionsсommitteeApplicationTests {
 		List<Faculty> faculties = facultyRepository.findAll();
 		assertThat(faculties, hasSize(0));
 
-		Faculty faculty = new Faculty();
-		faculty.setNameFaculty("f");
-		faculty.setAmountOfStudents(5);
+		Faculty faculty = TestProvider.createNewFaculty();		
 
-		facultyService.save(faculty);
+		faculty = facultyService.save(faculty);
 
 		faculties = facultyRepository.findAll();
 		assertThat(faculties, hasSize(1));
 
 		Faculty facultyFromDB = faculties.get(0);
+		
+		
+		
 		assertTrue(facultyFromDB.getNameFaculty().equals(faculty.getNameFaculty()));
 		assertTrue(facultyFromDB.getAmountOfStudents().equals(faculty.getAmountOfStudents()));
+		
+		assertThat(facultyFromDB.getSubjects(), hasSize(4));
+		
+		assertTrue(facultyFromDB.getSubjects().get(0).equals(TestProvider.createListSubjects().get(0)));
+		assertTrue(facultyFromDB.getSubjects().get(1).equals(TestProvider.createListSubjects().get(1)));
+		assertTrue(facultyFromDB.getSubjects().get(2).equals(TestProvider.createListSubjects().get(2)));
+		assertTrue(facultyFromDB.getSubjects().get(3).equals(TestProvider.createListSubjects().get(3)));
 
 	}
 
