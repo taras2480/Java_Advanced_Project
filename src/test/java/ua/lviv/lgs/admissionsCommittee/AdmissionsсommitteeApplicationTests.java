@@ -22,7 +22,6 @@ import ua.lviv.lgs.admissionsCommittee.domain.HappyFutureStudents;
 import ua.lviv.lgs.admissionsCommittee.domain.Notability;
 import ua.lviv.lgs.admissionsCommittee.domain.TestProvider;
 import ua.lviv.lgs.admissionsCommittee.domain.User;
-import ua.lviv.lgs.admissionsCommittee.domain.UserRole;
 import ua.lviv.lgs.admissionsCommittee.service.FacultyService;
 import ua.lviv.lgs.admissionsCommittee.service.HappyFutureStudentsService;
 import ua.lviv.lgs.admissionsCommittee.service.NotabilityService;
@@ -62,14 +61,7 @@ public class AdmissionsсommitteeApplicationTests {
 		List<User> users = userRepository.findAll();
 		assertThat(users, hasSize(0));
 
-		User user = new User();
-		user.setEmail("aviator2480@gmail.com");
-		user.setFirstName("1");
-		user.setLastName("1");
-		user.setBirthday("15");
-		user.setPassword("1");
-		user.setConfirmPassword("1");
-		user.setRole(UserRole.ROLE_USER);
+		User user = TestProvider.createNewUser();
 
 		userService.save(user);
 
@@ -77,6 +69,7 @@ public class AdmissionsсommitteeApplicationTests {
 		assertThat(users, hasSize(1));
 
 		User userFromDB = users.get(0);
+
 		assertTrue(userFromDB.getEmail().equals(user.getEmail()));
 		assertTrue(userFromDB.getFirstName().equals(user.getFirstName()));
 		assertTrue(userFromDB.getLastName().equals(user.getLastName()));
@@ -90,14 +83,7 @@ public class AdmissionsсommitteeApplicationTests {
 		List<User> users = userRepository.findAll();
 		assertThat(users, hasSize(0));
 
-		User user = new User();
-		user.setEmail("aviator22480@gmail.com");
-		user.setFirstName("2");
-		user.setLastName("2");
-		user.setBirthday("16");
-		user.setPassword("2");
-		user.setConfirmPassword("2");
-		user.setRole(UserRole.ROLE_ADMIN);
+		User user = TestProvider.createNewUser();
 
 		userRepository.save(user);
 
@@ -119,14 +105,7 @@ public class AdmissionsсommitteeApplicationTests {
 		List<User> users = userRepository.findAll();
 		assertThat(users, hasSize(0));
 
-		User user = new User();
-		user.setEmail("aviator22480@gmail.com");
-		user.setFirstName("2");
-		user.setLastName("2");
-		user.setBirthday("16");
-		user.setPassword("2");
-		user.setConfirmPassword("2");
-		user.setRole(UserRole.ROLE_ADMIN);
+		User user = TestProvider.createNewUser();
 
 		userRepository.save(user);
 
@@ -148,7 +127,7 @@ public class AdmissionsсommitteeApplicationTests {
 		List<Faculty> faculties = facultyRepository.findAll();
 		assertThat(faculties, hasSize(0));
 
-		Faculty faculty = TestProvider.createNewFaculty();		
+		Faculty faculty = TestProvider.createNewFaculty();
 
 		faculty = facultyService.save(faculty);
 
@@ -156,14 +135,12 @@ public class AdmissionsсommitteeApplicationTests {
 		assertThat(faculties, hasSize(1));
 
 		Faculty facultyFromDB = faculties.get(0);
-		
-		
-		
+
 		assertTrue(facultyFromDB.getNameFaculty().equals(faculty.getNameFaculty()));
 		assertTrue(facultyFromDB.getAmountOfStudents().equals(faculty.getAmountOfStudents()));
-		
+
 		assertThat(facultyFromDB.getSubjects(), hasSize(4));
-		
+
 		assertTrue(facultyFromDB.getSubjects().get(0).equals(TestProvider.createListSubjects().get(0)));
 		assertTrue(facultyFromDB.getSubjects().get(1).equals(TestProvider.createListSubjects().get(1)));
 		assertTrue(facultyFromDB.getSubjects().get(2).equals(TestProvider.createListSubjects().get(2)));
@@ -177,17 +154,9 @@ public class AdmissionsсommitteeApplicationTests {
 		List<Faculty> faculties = facultyRepository.findAll();
 		assertThat(faculties, hasSize(0));
 
-		Faculty faculty = new Faculty();
-		faculty.setNameFaculty("1");
-		faculty.setAmountOfStudents(5);
-
-		Faculty faculty2 = new Faculty();
-		faculty2.setNameFaculty("7");
-		faculty2.setAmountOfStudents(6);
-
-		Faculty faculty3 = new Faculty();
-		faculty3.setNameFaculty("7");
-		faculty3.setAmountOfStudents(6);
+		Faculty faculty = TestProvider.createNewFaculty();
+		Faculty faculty2 = TestProvider.createNewFaculty1();
+		Faculty faculty3 = TestProvider.createNewFaculty2();
 
 		facultyRepository.saveAll(Arrays.asList(faculty, faculty2, faculty3));
 
@@ -198,12 +167,24 @@ public class AdmissionsсommitteeApplicationTests {
 
 		assertTrue(facultiesFromDb.get(0).getNameFaculty().equals(faculty.getNameFaculty()));
 		assertTrue(facultiesFromDb.get(0).getAmountOfStudents().equals(faculty.getAmountOfStudents()));
+		assertTrue(facultiesFromDb.get(0).getSubjects().get(0).equals(TestProvider.createListSubjects().get(0)));
+		assertTrue(facultiesFromDb.get(0).getSubjects().get(1).equals(TestProvider.createListSubjects().get(1)));
+		assertTrue(facultiesFromDb.get(0).getSubjects().get(2).equals(TestProvider.createListSubjects().get(2)));
+		assertTrue(facultiesFromDb.get(0).getSubjects().get(3).equals(TestProvider.createListSubjects().get(3)));
 
 		assertTrue(facultiesFromDb.get(1).getNameFaculty().equals(faculty2.getNameFaculty()));
 		assertTrue(facultiesFromDb.get(1).getAmountOfStudents().equals(faculty2.getAmountOfStudents()));
+		assertTrue(facultiesFromDb.get(1).getSubjects().get(0).equals(TestProvider.createListSubjects1().get(0)));
+		assertTrue(facultiesFromDb.get(1).getSubjects().get(1).equals(TestProvider.createListSubjects1().get(1)));
+		assertTrue(facultiesFromDb.get(1).getSubjects().get(2).equals(TestProvider.createListSubjects1().get(2)));
+		assertTrue(facultiesFromDb.get(1).getSubjects().get(3).equals(TestProvider.createListSubjects1().get(3)));
 
 		assertTrue(facultiesFromDb.get(2).getNameFaculty().equals(faculty3.getNameFaculty()));
 		assertTrue(facultiesFromDb.get(2).getAmountOfStudents().equals(faculty3.getAmountOfStudents()));
+		assertTrue(facultiesFromDb.get(2).getSubjects().get(0).equals(TestProvider.createListSubjects2().get(0)));
+		assertTrue(facultiesFromDb.get(2).getSubjects().get(1).equals(TestProvider.createListSubjects2().get(1)));
+		assertTrue(facultiesFromDb.get(2).getSubjects().get(2).equals(TestProvider.createListSubjects2().get(2)));
+		assertTrue(facultiesFromDb.get(2).getSubjects().get(3).equals(TestProvider.createListSubjects2().get(3)));
 
 	}
 
@@ -214,9 +195,7 @@ public class AdmissionsсommitteeApplicationTests {
 
 		assertThat(faculties, hasSize(0));
 
-		Faculty faculty = new Faculty();
-		faculty.setNameFaculty("6");
-		faculty.setAmountOfStudents(8);
+		Faculty faculty = TestProvider.createNewFaculty();
 
 		facultyRepository.save(faculty);
 
@@ -227,31 +206,24 @@ public class AdmissionsсommitteeApplicationTests {
 
 		assertTrue(findById.getNameFaculty().equals(faculty.getNameFaculty()));
 		assertTrue(findById.getAmountOfStudents().equals(faculty.getAmountOfStudents()));
+		assertTrue(findById.getSubjects().get(0).equals(TestProvider.createListSubjects().get(0)));
+		assertTrue(findById.getSubjects().get(1).equals(TestProvider.createListSubjects().get(1)));
+		assertTrue(findById.getSubjects().get(2).equals(TestProvider.createListSubjects().get(2)));
+		assertTrue(findById.getSubjects().get(3).equals(TestProvider.createListSubjects().get(3)));
 
 	}
 
 	@Test
 	public void testGetAllNotabilities() {
 
-		User user = new User();
-		user.setEmail("custom12480@gmail.com");
-		user.setFirstName("3");
-		user.setLastName("3");
-		user.setPassword("32");
-		user.setConfirmPassword("32");
-		user.setRole(UserRole.ROLE_USER);
+		User user = TestProvider.createNewUser();
 
 		userService.save(user);
 
 		User userFromDB = userRepository.findAll().stream().findFirst().get();
 
-		Faculty faculty = new Faculty();
-		faculty.setNameFaculty("1");
-		faculty.setAmountOfStudents(5);
-
-		Faculty faculty2 = new Faculty();
-		faculty2.setNameFaculty("7");
-		faculty2.setAmountOfStudents(6);
+		Faculty faculty = TestProvider.createNewFaculty();
+		Faculty faculty2 = TestProvider.createNewFaculty1();
 
 		facultyRepository.saveAll(Arrays.asList(faculty, faculty2));
 
@@ -260,12 +232,14 @@ public class AdmissionsсommitteeApplicationTests {
 		Notability notability = new Notability();
 		notability.setFaculty(facultiesFromDB.get(0));
 		notability.setUser(userFromDB);
-		notability.setSumRating(6);
+		notability.setRatings(TestProvider.createListRatings());
+		notability.getSumRating();
 
 		Notability notability2 = new Notability();
 		notability2.setFaculty(facultiesFromDB.get(1));
 		notability2.setUser(userFromDB);
-		notability2.setSumRating(3);
+		notability2.setRatings(TestProvider.createListRatings1());
+		notability2.getSumRating();
 
 		List<Notability> notabilities = notabilityRepository.findAll();
 		assertThat(notabilities, hasSize(0));
@@ -280,25 +254,14 @@ public class AdmissionsсommitteeApplicationTests {
 	@Test
 	public void testDeleteFromNotability() {
 
-		User user = new User();
-		user.setEmail("custom12480@gmail.com");
-		user.setFirstName("3");
-		user.setLastName("3");
-		user.setPassword("32");
-		user.setConfirmPassword("32");
-		user.setRole(UserRole.ROLE_USER);
+		User user = TestProvider.createNewUser();
 
 		userService.save(user);
 
 		User userFromDB = userRepository.findAll().stream().findFirst().get();
 
-		Faculty faculty = new Faculty();
-		faculty.setNameFaculty("1");
-		faculty.setAmountOfStudents(5);
-
-		Faculty faculty2 = new Faculty();
-		faculty2.setNameFaculty("7");
-		faculty2.setAmountOfStudents(6);
+		Faculty faculty = TestProvider.createNewFaculty();
+		Faculty faculty2 = TestProvider.createNewFaculty1();
 
 		facultyRepository.saveAll(Arrays.asList(faculty, faculty2));
 
@@ -307,12 +270,14 @@ public class AdmissionsсommitteeApplicationTests {
 		Notability notability = new Notability();
 		notability.setFaculty(facultiesFromDB.get(0));
 		notability.setUser(userFromDB);
-		notability.setSumRating(6);
+		notability.setRatings(TestProvider.createListRatings());
+		notability.getSumRating();
 
 		Notability notability2 = new Notability();
 		notability2.setFaculty(facultiesFromDB.get(1));
 		notability2.setUser(userFromDB);
-		notability2.setSumRating(3);
+		notability2.setRatings(TestProvider.createListRatings1());
+		notability2.getSumRating();
 
 		List<Notability> notabilities = notabilityRepository.findAll();
 		assertThat(notabilities, hasSize(0));
@@ -334,25 +299,14 @@ public class AdmissionsсommitteeApplicationTests {
 	@Test
 	public void testFindNotabilityById() {
 
-		User user = new User();
-		user.setEmail("custom12480@gmail.com");
-		user.setFirstName("3");
-		user.setLastName("3");
-		user.setPassword("32");
-		user.setConfirmPassword("32");
-		user.setRole(UserRole.ROLE_USER);
+		User user = TestProvider.createNewUser();
 
 		userService.save(user);
 
 		User userFromDB = userRepository.findAll().stream().findFirst().get();
 
-		Faculty faculty = new Faculty();
-		faculty.setNameFaculty("1");
-		faculty.setAmountOfStudents(5);
-
-		Faculty faculty2 = new Faculty();
-		faculty2.setNameFaculty("7");
-		faculty2.setAmountOfStudents(6);
+		Faculty faculty = TestProvider.createNewFaculty();
+		Faculty faculty2 = TestProvider.createNewFaculty1();
 
 		facultyRepository.saveAll(Arrays.asList(faculty, faculty2));
 
@@ -361,10 +315,14 @@ public class AdmissionsсommitteeApplicationTests {
 		Notability notability = new Notability();
 		notability.setFaculty(facultiesFromDB.get(0));
 		notability.setUser(userFromDB);
+		notability.setRatings(TestProvider.createListRatings());
+		notability.getSumRating();
 
 		Notability notability2 = new Notability();
 		notability2.setFaculty(facultiesFromDB.get(1));
 		notability2.setUser(userFromDB);
+		notability2.setRatings(TestProvider.createListRatings1());
+		notability2.getSumRating();
 
 		List<Notability> notabilities = notabilityRepository.findAll();
 		assertThat(notabilities, hasSize(0));
@@ -380,14 +338,13 @@ public class AdmissionsсommitteeApplicationTests {
 		assertTrue(findById.getUser().equals(notability.getUser()));
 
 	}
-	
+
 	@Test
 	public void testGetAllHappyStudents() {
-		
+
 		HappyFutureStudents happyFutureStudents = new HappyFutureStudents();
 		happyFutureStudents.setFacultyId(1);
 		happyFutureStudents.setUserId(5);
-		
 
 		HappyFutureStudents happyFutureStudents2 = new HappyFutureStudents();
 		happyFutureStudents2.setFacultyId(3);
@@ -402,14 +359,14 @@ public class AdmissionsсommitteeApplicationTests {
 		assertThat(happyFutureStudentssFromDB, hasSize(2));
 
 	}
-	
+
 	@Test
 	public void testSaveHappyStudents() {
 
 		List<HappyFutureStudents> happyFutureStudentss = happyFutureStudentsRepository.findAll();
 		assertThat(happyFutureStudentss, hasSize(0));
 
-		HappyFutureStudents  happyFutureStudents = new HappyFutureStudents();
+		HappyFutureStudents happyFutureStudents = new HappyFutureStudents();
 		happyFutureStudents.setFacultyId(1);
 		happyFutureStudents.setUserId(5);
 
@@ -421,7 +378,7 @@ public class AdmissionsсommitteeApplicationTests {
 		HappyFutureStudents happyFutureStudentsFromDB = happyFutureStudentss.get(0);
 		assertTrue(happyFutureStudentsFromDB.getFacultyId().equals(happyFutureStudents.getFacultyId()));
 		assertTrue(happyFutureStudentsFromDB.getUserId().equals(happyFutureStudents.getUserId()));
-		
+
 	}
 
 }
