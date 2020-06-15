@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "faculty")
 public class Faculty {
@@ -26,9 +24,6 @@ public class Faculty {
 	@Column
 	private Integer amountOfStudents;
 
-//	@Lob
-//	private String encodedImage;
-	
 	@ElementCollection
 	private List<SubjectsOfAttestation> subjects;
 
@@ -89,7 +84,4 @@ public class Faculty {
 				+ ", subjects=" + subjects + "]";
 	}
 
-	
-
-	
 }
